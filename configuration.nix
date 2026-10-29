@@ -160,7 +160,7 @@
     # discord
     spotify
     vesktop # modlu discord
-
+    gh
     # UYGULAMALAR
 
     spotify

@@ -1,0 +1,153 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "height": 28,
+
+  "modules-left": [
+    "custom/launcher",
+    "hyprland/workspaces",
+    "tray"
+  ],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "cpu",
+    "memory",
+    "pulseaudio",
+    "network",
+    "battery",
+    "hyprland/language",
+    "custom/notification",
+    "custom/power-menu"
+  ],
+
+  "clock": {
+    "format": "{:%H:%M}",
+    "tooltip": true,
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%d/%m}",
+    "calendar": {
+      "format": {
+        "today": "<span color='#98971A'><b>{}</b></span>"
+      }
+    }
+  },
+
+  "hyprland/workspaces": {
+    "active-only": false,
+    "disable-scroll": true,
+    "format": "{icon}",
+    "on-click": "activate",
+    "sort-by-number": true,
+    "format-icons": {
+      "1": "I",
+      "2": "II",
+      "3": "III",
+      "4": "IV",
+      "5": "V",
+      "6": "VI",
+      "7": "VII",
+      "8": "VIII",
+      "9": "IX",
+      "10": "X"
+    },
+    "persistent-workspaces": {
+      "*": 5
+    }
+  },
+
+  "cpu": {
+    "format": "<span foreground='#98971A'> </span> {usage}%",
+    "format-alt": "<span foreground='#98971A'> </span> {avg_frequency} GHz",
+    "interval": 2,
+    "on-click-right": "kitty --title btop btop"
+  },
+
+  "memory": {
+    "format": "<span foreground='#689D6A'>󰟜 </span>{}%",
+    "format-alt": "<span foreground='#689D6A'>󰟜 </span>{used} GiB",
+    "interval": 2,
+    "on-click-right": "kitty --title btop btop"
+  },
+
+  "network": {
+    "format-wifi": "<span foreground='#B16286'> </span> {signalStrength}%",
+    "format-ethernet": "<span foreground='#B16286'>󰀂 </span>",
+    "tooltip-format": "Connected to {essid} {ifname} via {gwaddr}",
+    "format-linked": "{ifname} (No IP)",
+    "format-disconnected": "<span foreground='#B16286'>󰖪 </span>"
+  },
+
+  "tray": {
+    "icon-size": 20,
+    "spacing": 8
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "<span foreground='#458588'> </span> {volume}%",
+    "format-icons": {
+      "default": ["<span foreground='#458588'> </span>"]
+    },
+    "scroll-step": 2,
+    "on-click": "pamixer -t",
+    "on-click-right": "pavucontrol"
+  },
+
+  "battery": {
+    "format": "<span foreground='#FABD2F'>{icon}</span> {capacity}%",
+    "format-icons": [" ", " ", " ", " ", " "],
+    "format-charging": "<span foreground='#FABD2F'> </span>{capacity}%",
+    "format-full": "<span foreground='#FABD2F'> </span>{capacity}%",
+    "format-warning": "<span foreground='#FABD2F'> </span>{capacity}%",
+    "interval": 5,
+    "states": {
+      "warning": 20
+    },
+    "tooltip": true,
+    "tooltip-format": "{time}"
+  },
+
+  "hyprland/language": {
+    "tooltip": true,
+    "tooltip-format": "Keyboard layout",
+    "format": "<span foreground='#FABD2F'> </span> {}",
+    "format-en": "US"
+  },
+
+  "custom/launcher": {
+    "format": "",
+    "on-click": "random-wallpaper",
+    "on-click-right": "rofi -show drun",
+    "tooltip": true,
+    "tooltip-format": "Random Wallpaper"
+  },
+
+  "custom/notification": {
+    "tooltip": true,
+    "tooltip-format": "Notifications",
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "",
+      "dnd-none": "",
+      "inhibited-notification": "",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  "custom/power-menu": {
+    "tooltip": true,
+    "tooltip-format": "Power menu",
+    "format": "<span foreground='#CC241D'> </span>",
+    "on-click": "power-menu"
+  }
+}
