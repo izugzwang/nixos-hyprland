@@ -19,13 +19,11 @@
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   zramSwap.enable = true;
 
-  # Ağ ve Hostname
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
-  # Zaman Dilimi ve Türkçe Dil/Klavye Ayarları
   time.timeZone = "Europe/Istanbul";
-  i18n.defaultLocale = "en_US.UTF-8"; # Sistem dili İngilizce (hataları aratmak için en iyisi), formatlar Türkçe
+  i18n.defaultLocale = "en_US.UTF-8"; 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "tr_TR.UTF-8";
     LC_IDENTIFICATION = "tr_TR.UTF-8";
@@ -44,7 +42,7 @@
   };
   console.keyMap = "trq";
 
-  # Ses (PipeWire)
+  # PipeWire
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -53,7 +51,6 @@
     pulse.enable = true;
   };
 
-  # Donanım, Grafik ve NVIDIA (RTX 4060)
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -70,7 +67,6 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  # Hyprland ve Giriş Yöneticisi (tuigreet)
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -92,7 +88,6 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  # GTK tema, ikon, imleç ve font ayarları
   programs.dconf = {
     enable = true;
 
@@ -108,17 +103,14 @@
     };
   };
 
-  # Nix Flakes ve Özgür Olmayan Paket İzni
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
 
-  # Standart Linux binary'lerinin (Mason vb.) çalışması için hayat kurtarıcı nix-ld
   programs.nix-ld.enable = true;
 
-  # Kullanıcı Tanımı
   users.users.mustafa = {
     isNormalUser = true;
     description = "Mustafa";
@@ -131,9 +123,7 @@
     initialPassword = "123"; # İlk girişte 'passwd' komutuyla değiştireceksin
   };
 
-  # Sistem Paketleri (Hyprland + Neovim + Lua Geliştirme Seti)
   environment.systemPackages = with pkgs; [
-    # Editör ve Derleme/Arama Araçları
     neovim
     git
     wget
@@ -144,11 +134,9 @@
     gcc
     gnumake
     nodejs
-    # discord
-    spotify
-    vesktop # modlu discord
     gh
-    # UYGULAMALAR
+
+    # Apps
 
     spotify
     vesktop # modlu discord
@@ -156,12 +144,12 @@
     gsettings-desktop-schemas
     btop
 
-    # Lua ve Nix LSP / Formatlayıcılar (Neovim'de doğrudan hazır!)
+    # Lua ve Nix LSP 
     lua-language-server
     stylua
-    nixd # Nix dili için LSP
+    nixd 
     nixfmt
-    # Hyprland ve Masaüstü Araçları
+    # Hyprland and Desktop
     kitty
     waybar
     rofi
@@ -175,30 +163,24 @@
     networkmanagerapplet
     btop
     fastfetch
-    # Pano geçmişi
     cliphist
     wl-clip-persist
 
-    # Ekran görüntüsü, renk seçici ve kayıt
     grimblast
     hyprpicker
     wf-recorder
-    # GTK teması, ikonlar ve imleç
     colloid-gtk-theme
     papirus-icon-theme
     bibata-cursors
 
-    # Bildirim merkezi
     swaynotificationcenter
     libnotify
-    # Tarayıcı ve Dosya Yöneticisi
     (brave.override {
       commandLineArgs = "--enable-blink-features=MiddleClickAutoscroll --ozone-platform=wayland";
     })
     thunar
   ];
 
-  # Fontlar (Neovim ikonları için Nerd Fonts şart)
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
