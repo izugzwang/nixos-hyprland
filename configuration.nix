@@ -96,20 +96,7 @@
   programs.dconf = {
     enable = true;
 
-    profiles.user.databases = [
-      {
-        settings."org/gnome/desktop/interface" = {
-          gtk-theme = "Colloid-Dark";
-          icon-theme = "Papirus-Dark";
-          cursor-theme = "Bibata-Modern-Ice";
-          fcursor-size = lib.gvariant.mkInt32 24;
-          ont-name = "Maple Mono Normal 12";
-          monospace-font-name = "Maple Mono Normal 12";
-          color-scheme = "prefer-dark";
-        };
-      }
-    ];
-  };
+     };
 
   services.greetd = {
     enable = true;
@@ -223,10 +210,4 @@
 
   system.stateVersion = "24.11"; # Bunu ileride de değiştirme
 
-  environment.shellAliases = {
-    nrs = "sudo nixos-rebuild switch --flake ~/nixos#nixos";
-    nconf = "nvim ~/nixos/configuration.nix";
-    hconf = "nvim ~/.config/hypr/hyprland.lua";
-  };
-
-}
+  }
